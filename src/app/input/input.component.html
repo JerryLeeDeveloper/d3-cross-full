@@ -1,0 +1,78 @@
+<div style="float: left; width: 30%;">
+    <h1> Inputs </h1>
+    <h4> -100 < value < 100 </h4>
+    <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+        <div class="dataContent"> 
+            <div class="dataTitle">
+                <div class="alignLeft">
+                    <label> A: </label><br />
+                    <label> B: </label><br />
+                    <label> C: </label><br />
+                </div>
+            </div>
+            <div class="dataItems">
+                
+                    <div class="form-group">
+                        <input id ="dataA" class="form-control" formControlName="dataA" required style="width:100px" placeholder="0" >
+                        <input id ="dataB" class="form-control" formControlName="dataB" required style="width:100px" placeholder="0" >
+                        <input id ="dataC" class="form-control" formControlName="dataC" required style="width:100px" placeholder="0" >
+                    </div>
+            </div>
+        </div>
+        <div class="dataWarning">
+            <div *ngIf="dataA.invalid && (dataA.dirty || dataA.touched)"
+            class="alert alert-danger">
+                <div *ngIf= "dataA.errors.required">
+                A is required.
+                </div>
+                <div *ngIf="!dataA.errors.required && dataA.errors.number.type">
+                A is not a number
+                </div>
+                <div *ngIf="dataA.errors.number.max">
+                A must less than or equal to 100
+                </div>
+                <div *ngIf="dataA.errors.number.min">
+                A must greater than or equal to -100
+                </div>                
+            </div>
+            <div *ngIf="dataB.invalid && (dataB.dirty || dataB.touched)"
+            class="alert alert-danger">
+                <div *ngIf="dataB.errors.required">
+                B is required.
+                </div>
+                <div *ngIf="!dataB.errors.required && dataB.errors.number.type">
+                B is not a number
+                </div>                
+                <div *ngIf="dataB.errors.number.max">
+                B must less than or equal to 100
+                </div>
+                <div *ngIf="dataB.errors.number.min">
+                B must greater than or equal to -100
+                </div>                
+            </div>
+            <div *ngIf="dataC.invalid && (dataC.dirty || dataC.touched)"
+            class="alert alert-danger">
+                <div *ngIf="dataC.errors.required">
+                C is required.
+                </div>
+                <div *ngIf="!dataC.errors.required && dataC.errors.number.type">
+                C is not a number
+                </div>                  
+                <div *ngIf="dataC.errors.number.max">
+                C must less than or equal to 100
+                </div>
+                <div *ngIf="dataC.errors.number.min">
+                C must greater than or equal to -100
+                </div>                
+            </div>
+            <div style="display:none">{{ dataForm.status }}</div>
+        </div>
+        <button style="display:none" class='btn' type="submit" [disabled]="!dataForm.valid">Submit</button>
+    </form>
+</div>
+<div style="float:right;padding: 20px">
+    <app-coordinate-axis [dataA]="dataA.value" [dataB]="dataB.value" [dataC]="dataC.value" [valid]="dataForm.valid" ></app-coordinate-axis>
+</div>
+
+    
+    
